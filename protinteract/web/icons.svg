@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+<symbol id="molecule" viewBox="0 0 24 24"><path d="m6 6 6 6m0 0 6-6m-6 6-6 6m6-6 6 6"/><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/></symbol>
+<symbol id="file" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8zM14 3v6h5M8 13h8M8 17h6"/></symbol>
+<symbol id="sequence" viewBox="0 0 24 24"><path d="M7 3c0 8 10 10 10 18M17 3C17 11 7 13 7 21M7 4h10M8 8h8M8 16h8M7 20h10"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path d="M12 5v16M3 3l9 2 9-2v16l-9 2-9-2z"/></symbol>
+<symbol id="compare" viewBox="0 0 24 24"><path d="M3 4h7v16H3zM14 4h7v16h-7zM6 9h1M6 13h1M17 9h1M17 13h1"/></symbol>
+<symbol id="code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 20"/></symbol>
+</svg>

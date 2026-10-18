@@ -1,0 +1,18 @@
+.changes-section { margin-top: 22px; padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--white); scroll-margin-top: 80px; }
+.markdown-body { font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.markdown-body h1 { font-size: 28px; margin: 20px 0; }
+.markdown-body h2 { font-size: 18px; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin: 28px 0 14px; }
+.markdown-body h3 { font-size: 16px; margin-top: 22px; }
+.markdown-body h4 { font-size: 14px; }
+.markdown-body code { font: 12px/1.6 var(--protein-font-sequence); background: #edf2fa; padding: 2px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+.markdown-body pre code { padding: 0; background: none; }
+.markdown-body blockquote { border-left: 3px solid var(--protein-brand); background: var(--accent); margin: 18px 0; padding: 4px 14px; }
+.markdown-body table { display: block; overflow: auto; max-width: 100%; margin: 16px 0; }
+.markdown-body .table-wrap { margin: 16px 0; }
+.markdown-body .table-wrap table { display: table; margin: 0; }
+.markdown-body td, .markdown-body th { min-width: 110px; white-space: normal; }
+.markdown-body img { max-width: 100%; }
+.markdown-body li { margin: 6px 0; }
+.markdown-body hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
+.markdown-body a { overflow-wrap: anywhere; }
+@media (max-width: 640px) { .changes-section { padding: 14px; } .markdown-body h1 { font-size: 24px; } }

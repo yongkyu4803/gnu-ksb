@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProtInteract · 모델링 입력 준비</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/markdown.css"><script type="module" src="/static/app.js"></script>
+</head><body>
+<header><a class="brand" href="/"><svg class="brand-icon" aria-hidden="true"><use href="/static/icons.svg#molecule"/></svg>ProtInteract</a><span class="header-description">단백질 모델링 입력 준비</span><div class="site-links"><a href="/docs">Docs / 문서</a><a href="/api/docs">API</a></div></header>
+<aside class="lab-sidebar" aria-label="주 탐색"><p class="sidebar-label">WORKSPACE</p><nav aria-label="작업 선택"><button id="tab-jobs" aria-pressed="true" type="button"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#file"/></svg>JSON 만들기</button><button id="tab-lookup" aria-pressed="false" type="button"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#sequence"/></svg>서열 조회</button><a href="/docs"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#book"/></svg>프로젝트 문서</a><a href="#changes"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#compare"/></svg>원본 대비 변경사항</a></nav><div class="sidebar-note"><strong>PROTEIN LAB</strong><span>UniProt 서열을 확인하고<br>모델링 입력을 준비합니다.</span><small>로컬 연구 작업 공간</small></div></aside>
+<main>
+<section class="intro"><p class="breadcrumb">워크스페이스 <span>›</span> 모델링 입력 준비</p><div class="page-heading"><div><h1>AlphaFold 입력 준비</h1><p>UniProt 서열을 확인하고 타겟·후보 조합을 JSON으로 저장하세요.</p></div><span class="tag">UniProt → AlphaFold Server</span></div></section>
+<section id="jobs-panel" aria-labelledby="tab-jobs" class="workspace">
+<form id="jobs-form" class="input-panel"><p class="eyebrow">01 / INPUT</p><h2>모델링 구성</h2>
+<label for="target">타겟 구성 <small>ID와 복제수 · 한 줄에 하나</small></label><textarea id="target" rows="4" required placeholder="P04637 1&#10;Q00987 2">Q9M158 1</textarea>
+<label for="label">타겟 이름 <small>선택 · 영문, 숫자, 밑줄, 하이픈</small></label><input id="label" maxlength="100" placeholder="비워 두면 ID로 자동 생성">
+<label for="candidates">후보 UniProt ID</label><textarea id="candidates" rows="6" required placeholder="P04637&#10;Q00987"></textarea><p class="hint">줄바꿈, 쉼표, 공백, 세미콜론으로 구분 · 최대 100개</p>
+<label for="limit">잡 하나의 토큰 한도</label><input id="limit" type="number" value="5000" min="1" max="5000" step="1" required>
+<p class="hint">타겟 길이 × 복제수 + 후보 길이. Server 최대 5,000 토큰 이내에서 설정합니다. <a href="https://alphafoldserver.com/" target="_blank" rel="noreferrer">공식 안내</a> 확인: 2026-10-18</p>
+<label class="check"><input id="jobs-cache" type="checkbox" checked> 저장된 조회 결과 사용</label><button class="primary" id="generate" type="submit">미리보기 만들기 ↗</button>
+</form>
+<div class="output-panel"><div class="output-heading"><div><p class="eyebrow">02 / REVIEW & EXPORT</p><h2>생성 결과</h2></div><span class="tag">.JSON</span></div>
+<p id="jobs-status" role="status" aria-live="polite">타겟과 후보를 입력하면 구성을 확인할 수 있습니다.</p>
+<div id="jobs-results" hidden><div id="metrics" class="metrics"></div><div id="warnings" class="notice"></div>
+<h3>타겟 최종 구성</h3><div id="targets-table" class="table-wrap"></div>
+<h3>후보별 생성 계획</h3><p class="hint">서열 보기를 누르면 JSON에 사용한 전체 서열을 확인할 수 있습니다.</p><div id="plans-table" class="table-wrap"></div>
+<details><summary>첫 번째 잡 JSON 미리보기 · 서열 축약</summary><pre id="json-preview"></pre></details>
+<button id="download" class="primary" type="button" disabled>JSON 다운로드 ↓</button><p class="hint">파일에는 전체 서열이 들어갑니다. AlphaFold Server에서 직접 임포트해 주세요. 실제 Server 수락은 아직 확인하지 않았습니다.</p></div>
+<div class="empty" id="jobs-empty"><svg class="empty-icon" aria-hidden="true"><use href="/static/icons.svg#sequence"/></svg><h3>입력할 단백질을 준비해 주세요</h3><p>타겟과 후보 ID를 넣고 미리보기를 만들면<br>서열·복제수와 생성할 잡을 확인할 수 있습니다.</p><small>서열 확인 → 구성 검토 → JSON 다운로드</small></div></div></section>
+<section id="lookup-panel" aria-labelledby="tab-lookup" hidden><form id="lookup-form" class="lookup-form"><div><p class="eyebrow">SEQUENCE CHECK</p><h2>UniProt 서열 조회</h2><label for="lookup-ids">UniProt ID · 최대 100개</label><textarea id="lookup-ids" rows="4" required placeholder="P04637&#10;P04637-2"></textarea></div><div><label class="check"><input id="lookup-cache" type="checkbox" checked> 저장된 조회 결과 사용</label><button class="primary" id="lookup-submit" type="submit">서열 조회 ↗</button></div></form><p id="lookup-status" role="status" aria-live="polite">canonical ID와 isoform ID를 구분해 입력할 수 있습니다.</p><div id="lookup-table" class="table-wrap"></div></section>
+<section id="sequence-panel" hidden><div class="output-heading"><h3 id="sequence-title">전체 서열</h3><button id="close-sequence" type="button">닫기 ×</button></div><pre id="sequence-text"></pre></section>
+<section id="changes" class="changes-section"><p class="eyebrow">WHAT CHANGED / ORIGINAL → CURRENT</p><h2>원본 레포 대비 변경사항</h2><p>JSON 생성이라는 목적은 그대로, 화면과 입력 검증을 개선했습니다.</p><div id="changes-content" class="markdown-body"><p>변경사항을 불러오는 중…</p></div><a href="/docs?doc=CHANGES_FROM_ORIGINAL.md">문서에서 자세히 보기 ↗</a></section>
+</main><footer><span>ProtInteract / Sequence preparation</span><a href="/docs">프로젝트 문서 전체 보기 ↗</a><span>구조 예측과 제출은 AlphaFold Server에서 직접 진행합니다.</span></footer><script type="module" src="/static/changes.js"></script></body></html>
